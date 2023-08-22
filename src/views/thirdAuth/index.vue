@@ -46,6 +46,7 @@ const rdUrl = route.query.redirectUrl
 const appid = route.query.appid
 
 if(!rdUrl || !appid) {
+    console.log("非法参数");
     router.push("/")
 }
 

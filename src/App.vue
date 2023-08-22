@@ -22,6 +22,9 @@
             </Modal>
         </transition>
         <router-view></router-view>
+       
+        
+        
     </div>
     <div class="header">
         Email: inymtern_cl@126.com
@@ -132,6 +135,7 @@ const userLogin = () => {
         const userinfo = res.data.userinfo
         store.login(userinfo.username, userinfo.email, userinfo.headImg, res.data.token)
         cfgStore.closeLoginView()
+        window.toastr.success("登录成功！")
     })
 }
 store.loadUserInfo()

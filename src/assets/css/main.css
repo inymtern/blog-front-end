@@ -74,3 +74,41 @@
 .center {
   text-align: center;
 }
+.toast-info {
+  background: #fff;
+}
+.toast-error {
+  background: #fff;
+}
+.toast-success {
+  background:#fff;
+}
+#toast-container > div {
+  color: #333;
+  padding: 15px 15px 15px 60px;
+}
+#toast-container > .toast-success:before {
+  content: "success";
+  font-size: 12px;
+}
+#toast-container > .toast-error:before {
+  content: "error";
+  font-size: 12px;
+}
+#toast-container > .toast-info:before {
+  content: "info";
+  font-size: 12px;
+}
+
+body #toast-container>.toast-success {
+  background-image: url(../img/success.png) !important;
+  background-size: 30px 30px;
+}
+body #toast-container>.toast-error {
+  background-image: url(../img/warning.png) !important;
+  background-size: 30px 30px;
+}
+body #toast-container>.toast-info {
+  background-image: url(../img/notice.png) !important;
+  background-size: 30px 30px;
+}

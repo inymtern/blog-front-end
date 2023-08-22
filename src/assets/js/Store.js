@@ -115,6 +115,13 @@ export const configStore = defineStore('config', {
                 clearInterval(this.loadTimer)
                 this.loadingText = "加载中"
             }
+        },
+        closeLoading() {
+            if(this.loading) {
+                this.loading = false
+                clearInterval(this.loadTimer)
+                this.loadingText = "加载中"
+            }
         }
     }
 

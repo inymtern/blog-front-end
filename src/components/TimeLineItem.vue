@@ -6,7 +6,7 @@
             </div>
             <div class="content_l">
                 <div v-if="data.img_l">
-                    <img :src="data.img_l" :data-src="data.img_l" loading="lazy" style="max-width: 350px;max-height: 200px;">
+                    <img v-lazy="data.img_l"   style="max-width: 350px;max-height: 200px;">
                 </div>
                 <div class="text_title" @click="goContent(data.id_l)">{{ data.title_l }}</div>
                 <div class="text_intro">{{ data.intro_l }}</div>
@@ -19,12 +19,12 @@
             </div>
             <div class="content_r" :style="{ 'margin-top': data.gap + 'px' }">
                 <div v-if="data.img_r">
-                    <img :src="data.img_r" :data-src="data.img_r" loading="lazy" style="max-width: 350px;max-height: 200px;">
+                    <img v-lazy="data.img_r"  style="max-width: 350px;max-height: 200px;" >
                 </div>
                 <div class="text_title" @click="goContent(data.id_r)">{{ data.title_r }}</div>
                 <div class="text_intro">{{ data.intro_r }}</div>
             </div>
-
+            
         </div>
     </div>
 </template>
@@ -167,6 +167,7 @@ img:hover {
 
 <script setup>
 import { ref, defineProps, onMounted } from 'vue';
+import nophoto from '../assets/img/nophoto.png'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 const props = defineProps({
@@ -176,6 +177,7 @@ const props = defineProps({
     }
 })
 
+
 const goContent = (id) => {
     router.push({
         path: '/content',
@@ -183,6 +185,13 @@ const goContent = (id) => {
     })
 }
 
+const setDefaultImage = (i) => {
+    if(i == 0) {
+        props.data.img_l = nophoto
+    }else {
+        props.data.img_r = nophoto
+    }
+}
 
 
 </script>

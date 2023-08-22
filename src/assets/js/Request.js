@@ -1,18 +1,19 @@
 import axios from 'axios';
-import { get } from './LocalStore';
+import { get, remove } from './LocalStore';
+import { userStore, configStore } from './Store'
 
 // 创建 axios 实例
 const instance = axios.create({
-  baseURL: 'http://127.0.0.1:8999/blog/', // 设置 baseURL
-  timeout: 5000, // 设置超时时间，单位为毫秒
+  baseURL: 'http://127.0.0.1:8999/', // 设置 baseURL
+  timeout: 20000, // 设置超时时间，单位为毫秒
 });
 
 // 添加请求拦截器
 instance.interceptors.request.use(
   config => {
     const token = get('Authorization')
-    if(token) {
-        config.headers['Authorization'] = "Bearer " + token
+    if (token) {
+      config.headers['Authorization'] = "Bearer " + token
     }
     return config;
   },
@@ -25,15 +26,24 @@ instance.interceptors.request.use(
 // 添加响应拦截器
 instance.interceptors.response.use(
   response => {
-    // 对响应数据进行处理，如统一处理错误码等
     return response;
   },
   error => {
     // 处理响应错误
-    if(error.response.status == 403) {
-        window.toastr.error('请求被拒绝!')
-    }else if(error.response.status == 500){
-        window.toastr.error(error.response.data)
+    const cfgStore = configStore()
+    cfgStore.closeLoading();
+    console.log(error);
+    if(error.message.indexOf('timeout') != -1) {
+      window.toastr.error('请求超时!')
+    } else if (error.response.status == 403) {
+      window.toastr.error('请求被拒绝! 请登录后重试')
+    } else if (error.response.status == 500) {
+      window.toastr.error(error.response.data)
+    } else if (error.response.status == 501) {
+      window.toastr.error("身份认证过期，请重新登录!")
+      remove('Authorization')
+      const store = userStore()
+      store.logout()
     }
     return Promise.reject(error);
   }

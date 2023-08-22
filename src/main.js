@@ -4,8 +4,8 @@ import App from './App.vue'
 import router from './router'
 import { createPinia } from 'pinia'
 import axios from '@/assets/js/request'
-
-
+import nopic from '@/assets/img/nophoto.png'
+import VueLazyLoad from 'vue3-lazyload'
 
 import VueMarkdownEditor from '@kangc/v-md-editor';
 import '@kangc/v-md-editor/lib/style/base-editor.css';
@@ -24,6 +24,7 @@ import '@kangc/v-md-editor/lib/plugins/todo-list/todo-list.css';
 import Prism from 'prismjs';
 
 import markdownItAttrs from 'markdown-it-attrs'
+
 // const titlePlugin = function (md) {
 //     md.inline.ruler.before('emphasis', 'title', function (state, silent) {
 //         const src = state.src;
@@ -74,11 +75,29 @@ VueMarkdownEditor
 
 
 
+
 const app = createApp(App)
+
 const pinia = createPinia()
 app.config.globalProperties.$axios = axios
 app.use(router)
     .use(VueMarkdownEditor)
     .use(pinia)
+    .use(VueLazyLoad, {
+        loading: nopic,
+        error: nopic,
+        lifecycle: {
+            loading: (el) => {
+                console.log('loading', el)
+            },
+            error: (el) => {
+                console.log('error', el)
+            },
+            loaded: (el) => {
+                console.log('loaded', el)
+            }
+        }
+    })
+
 
 app.mount('#app')

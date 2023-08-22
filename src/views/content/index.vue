@@ -67,6 +67,7 @@ const firstImg = ref('')
 const handleUploadImage = (event, insertImage, files) => {
     // 拿到 files 之后上传到文件服务器，然后向编辑框中插入对应的内容
     const formData = new FormData();
+    window.toastr.info('上传中...')
     formData.append('file', files[0]);
     uploadImg(formData).then(res => {
         firstImg.value = res.data
@@ -76,6 +77,7 @@ const handleUploadImage = (event, insertImage, files) => {
             width: 'auto',
             height: 'auto',
         });
+        window.toastr.success('上传成功')
     })
 
 }
