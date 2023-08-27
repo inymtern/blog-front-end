@@ -87,15 +87,15 @@ app.use(router)
         loading: nopic,
         error: nopic,
         lifecycle: {
-            loading: (el) => {
-                console.log('loading', el)
-            },
-            error: (el) => {
-                console.log('error', el)
-            },
-            loaded: (el) => {
-                console.log('loaded', el)
-            }
+            // loading: (el) => {
+            //     console.log('loading', el)
+            // },
+            // error: (el) => {
+            //     console.log('error', el)
+            // },
+            // loaded: (el) => {
+            //     console.log('loaded', el)
+            // }
         }
     })
 

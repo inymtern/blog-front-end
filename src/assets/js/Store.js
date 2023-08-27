@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { getUserInfo } from './api/UserApi'
 import { get, set, remove } from './LocalStore'
+import nophoto from '@/assets/img/nophoto.png'
 
 export const userStore = defineStore('user', {
     state: () => {
@@ -8,7 +9,7 @@ export const userStore = defineStore('user', {
             isLogin: false,
             username: 'Guest',
             email: 'click to login.. ',
-            headImg: 'https://st0.dancf.com/iliad-editor/ebaec665-a2b2-4b02-b05d-e842860b28f8.png',
+            headImg: nophoto,
             token: ''
         }
     },
@@ -54,7 +55,7 @@ export const userStore = defineStore('user', {
             this.isLogin = false
             this.username = 'Guest'
             this.email = 'click to login.. '
-            this.headImg =  'https://st0.dancf.com/iliad-editor/ebaec665-a2b2-4b02-b05d-e842860b28f8.png'
+            this.headImg =  nophoto
         }
     }
 })
@@ -69,7 +70,10 @@ export const configStore = defineStore('config', {
             showSetting: false,
             loading: false,
             loadingText: '加载中',
-            loadTimer: ''
+            loadTimer: '',
+            pageLoading: false,
+            showImg: false,
+            imgUrl: 'http://127.0.0.1:8999/blog/api/v1/common/images/1692623661501.png'
         }
     },
 
@@ -121,6 +125,18 @@ export const configStore = defineStore('config', {
                 this.loading = false
                 clearInterval(this.loadTimer)
                 this.loadingText = "加载中"
+            }
+        },
+        setPageLoading(b) {
+            this.pageLoading = b
+        },
+        setShowImg(b) {
+            this.showImg = b
+        },
+        setImgUrl(url) {
+            if(url) {
+                this.imgUrl = url
+                this.showImg = true
             }
         }
     }

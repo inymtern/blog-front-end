@@ -4,7 +4,7 @@ import { userStore, configStore } from './Store'
 
 // 创建 axios 实例
 const instance = axios.create({
-  baseURL: 'http://127.0.0.1:8999/', // 设置 baseURL
+  baseURL: '/', // 设置 baseURL
   timeout: 20000, // 设置超时时间，单位为毫秒
 });
 

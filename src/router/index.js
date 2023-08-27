@@ -14,8 +14,8 @@ const router = createRouter({
       component: () => import('../views/content/index.vue')
     },
     {
-      path: '/third-auth',
-      name: 'third-auth',
+      path: '/oauth2-Login',
+      name: 'oauth2-Login',
       component: () => import('../views/thirdAuth/index.vue')
     },
   ]

@@ -2,12 +2,12 @@
 
 @font-face {
   font-family: 'en';
-  src: url('../font/FiraCode-Regular.woff2');
+  src: url('https://common-1305559490.cos.ap-shanghai.myqcloud.com/font/FiraCode-Regular.woff2');
 }
 
 @font-face {
   font-family: 'zh';
-  src: url('../font/QingYuanMono.woff');
+  src: url('https://common-1305559490.cos.ap-shanghai.myqcloud.com/font/QingYuanMono_min.woff');
 }
 
 * {

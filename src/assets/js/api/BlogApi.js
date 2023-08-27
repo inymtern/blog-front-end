@@ -6,8 +6,8 @@ export function insertOrUpdate(data) {
     return axios.post('/blog/api/v1/note', data)
 }
 
-export function getIndex() {
-    return axios.get('/blog/api/v1/note/index')
+export function getIndex(page) {
+    return axios.get('/blog/api/v1/note/index?page=' + page)
 }
 
 export function deleteById(id) {

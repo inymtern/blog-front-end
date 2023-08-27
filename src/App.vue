@@ -44,7 +44,11 @@
 
 
 
-
+    <transition name="fade" appear>
+        <Modal v-if="cfgStore.showImg" @close-modal="cfgStore.setShowImg(false)">
+            <img v-lazy="cfgStore.imgUrl" style="max-width: 1000px; max-height: 600px;">
+        </Modal>
+    </transition>
 
 
 
@@ -61,7 +65,8 @@
 
     <transition name="fade" appear>
         <Modal v-if="cfgStore.showSetting" @close-modal="cfgStore.closeSettingView()">
-            <button class="buttonn" @click="quit">退出登录</button>
+            <button class="buttonn" @click="goGPT">· ChatGPT Online</button>
+            <button class="buttonn" @click="quit">· 退出登录</button>
         </Modal>
     </transition>
 
@@ -118,7 +123,6 @@ const route = useRoute()
 const store = userStore()
 const cfgStore = configStore()
 
-
 const loginForm = ref({
     username: '',
     password: ''
@@ -154,6 +158,10 @@ const openLoginModal = () => {
         //     cfgStore.setLoading(false)
         // }, 5000);
     }
+}
+
+const goGPT = () => {
+    window.open('https://inymtern.cc:5173')
 }
 
 const togEditMode = (mode, ins) => {

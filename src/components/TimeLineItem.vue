@@ -6,9 +6,9 @@
             </div>
             <div class="content_l">
                 <div v-if="data.img_l">
-                    <img v-lazy="data.img_l"   style="max-width: 350px;max-height: 200px;">
+                    <img v-lazy="data.img_l" @click="showImg(data.img_l)" class="imgg"  style="max-width: 400px;max-height: 400px;">
                 </div>
-                <div class="text_title" @click="goContent(data.id_l)">{{ data.title_l }}</div>
+                <div class="text_title" @click="goContent(data.id_l)">  {{ data.title_l }}</div>
                 <div class="text_intro">{{ data.intro_l }}</div>
             </div>
         </div>
@@ -19,7 +19,7 @@
             </div>
             <div class="content_r" :style="{ 'margin-top': data.gap + 'px' }">
                 <div v-if="data.img_r">
-                    <img v-lazy="data.img_r"  style="max-width: 350px;max-height: 200px;" >
+                    <img v-lazy="data.img_r" @click="showImg(data.img_r)" class="imgg"  style="max-width: 400px;max-height: 400px;" >
                 </div>
                 <div class="text_title" @click="goContent(data.id_r)">{{ data.title_r }}</div>
                 <div class="text_intro">{{ data.intro_r }}</div>
@@ -37,20 +37,25 @@
 }
 
 .c_c {
-    padding: 40px;
+    padding: 40px 60px;
 
 }
+.imgg {
+    border-radius: 3px;
+    z-index: 9;
+ }
 
 .text_title {
-    font-size: 20px;
+    font-size: 22px;
     margin: 5px 0;
     transition: all .3s;
+    
 }
 
 .text_title:hover {
     cursor: pointer;
     transform: translateY(-3px);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .text_intro {
@@ -83,7 +88,7 @@
     position: absolute;
     right: 10px;
     top: 10px;
-    width: 40px;
+    width: 60px;
     height: 2px;
     background: #343a40;
     border-radius: 10px;
@@ -92,9 +97,10 @@
 .date_l {
     position: absolute;
     top: -6px;
-    right: 50px;
-    font-size: 14px;
-    color: #666;
+    right: 80px;
+    font-size: 13px;
+    color: #333;
+    font-weight: bold;
     width: 200px;
     text-align: right;
     /* background: #000; */
@@ -103,9 +109,10 @@
 .date_r {
     position: absolute;
     top: -6px;
-    left: 50px;
-    font-size: 14px;
-    color: #666;
+    left: 80px;
+    font-size: 13px;
+    color: #333;
+    font-weight: bold;
     text-align: left;
     width: 200px;
     /* background: #000; */
@@ -119,11 +126,14 @@
 
 img {
     transition: all .3s;
+    
 }
 
 img:hover {
     cursor: pointer;
-    transform: scale(1.1)
+    transform: scale(1.2);
+    box-shadow: 1px 1px 4px 1px #e5e5e5;
+    
 }
 
 /* ---------------- */
@@ -138,7 +148,7 @@ img:hover {
     position: absolute;
     left: 10px;
     /* top: 60px;   */
-    width: 40px;
+    width: 60px;
     height: 2px;
     background: #343a40;
     border-radius: 10px;
@@ -169,6 +179,8 @@ img:hover {
 import { ref, defineProps, onMounted } from 'vue';
 import nophoto from '../assets/img/nophoto.png'
 import { useRouter } from 'vue-router'
+import { configStore } from '../assets/js/Store';
+const cfgStore = configStore()
 const router = useRouter()
 const props = defineProps({
     data: {
@@ -176,6 +188,10 @@ const props = defineProps({
         default: { tag_l: 'OFG | 09-10', title_l: 'THIS IS A TITLE', img_l: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg', 'intro_l': 'Please don`t give me a super big trouble, please yes no please no, you will gen.', tag_r: 'OFG | 09-10', title_r: '刷卡时', img_r: '', intro_r: '啊是大家是多久啊圣诞节啊大苏打阿松大', gap: 20, }
     }
 })
+
+const showImg = (url) => {
+    cfgStore.setImgUrl(url)
+}
 
 
 const goContent = (id) => {
