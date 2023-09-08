@@ -91,6 +91,7 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    margin-right: 60px;
 }
 
 .userinfotool .setting {

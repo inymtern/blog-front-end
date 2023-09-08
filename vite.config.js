@@ -21,7 +21,7 @@ export default defineConfig({
   plugins: [
     vue(),
     prismjs({
-      languages: ['json', 'java', 'python', 'js']
+      languages: ['json', 'java', 'python', 'js', 'go']
     })
   ],
   resolve: {

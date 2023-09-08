@@ -6,25 +6,27 @@
             </div>
             <div class="content_l">
                 <div v-if="data.img_l">
-                    <img v-lazy="data.img_l" @click="showImg(data.img_l)" class="imgg"  style="max-width: 400px;max-height: 400px;">
+                    <img v-lazy="data.img_l" @click="showImg(data.img_l)" class="imgg"
+                        style="max-width: 400px;max-height: 400px;">
                 </div>
-                <div class="text_title" @click="goContent(data.id_l)">  {{ data.title_l }}</div>
+                <div class="text_title" @click="goContent(data.id_l)"> {{ data.title_l }}</div>
                 <div class="text_intro">{{ data.intro_l }}</div>
             </div>
         </div>
         <div class="c_c c_right" :style="{ 'margin-top': data.gap + 'px', '--height': data.gap + 'px' }">
 
             <div v-if="data.id_r" class="hor_line_r" :style="{ 'top': (data.gap + 10) + 'px' }">
-                <div class="date_r">{{ data.tag_r }}</div>
+                <div class="date_r">{{ calDate(data.tag_r) }}</div>
             </div>
             <div class="content_r" :style="{ 'margin-top': data.gap + 'px' }">
                 <div v-if="data.img_r">
-                    <img v-lazy="data.img_r" @click="showImg(data.img_r)" class="imgg"  style="max-width: 400px;max-height: 400px;" >
+                    <img v-lazy="data.img_r" @click="showImg(data.img_r)" class="imgg"
+                        style="max-width: 400px;max-height: 400px;">
                 </div>
                 <div class="text_title" @click="goContent(data.id_r)">{{ data.title_r }}</div>
                 <div class="text_intro">{{ data.intro_r }}</div>
             </div>
-            
+
         </div>
     </div>
 </template>
@@ -40,16 +42,17 @@
     padding: 40px 60px;
 
 }
+
 .imgg {
     border-radius: 3px;
     z-index: 9;
- }
+}
 
 .text_title {
     font-size: 22px;
     margin: 5px 0;
     transition: all .3s;
-    
+
 }
 
 .text_title:hover {
@@ -126,14 +129,14 @@
 
 img {
     transition: all .3s;
-    
+
 }
 
 img:hover {
     cursor: pointer;
     transform: scale(1.2);
     box-shadow: 1px 1px 4px 1px #e5e5e5;
-    
+
 }
 
 /* ---------------- */
@@ -176,7 +179,7 @@ img:hover {
 </style>
 
 <script setup>
-import { ref, defineProps, onMounted } from 'vue';
+import { ref, defineProps, onMounted, computed } from 'vue';
 import nophoto from '../assets/img/nophoto.png'
 import { useRouter } from 'vue-router'
 import { configStore } from '../assets/js/Store';
@@ -188,6 +191,8 @@ const props = defineProps({
         default: { tag_l: 'OFG | 09-10', title_l: 'THIS IS A TITLE', img_l: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg', 'intro_l': 'Please don`t give me a super big trouble, please yes no please no, you will gen.', tag_r: 'OFG | 09-10', title_r: '刷卡时', img_r: '', intro_r: '啊是大家是多久啊圣诞节啊大苏打阿松大', gap: 20, }
     }
 })
+
+
 
 const showImg = (url) => {
     cfgStore.setImgUrl(url)
@@ -202,9 +207,9 @@ const goContent = (id) => {
 }
 
 const setDefaultImage = (i) => {
-    if(i == 0) {
+    if (i == 0) {
         props.data.img_l = nophoto
-    }else {
+    } else {
         props.data.img_r = nophoto
     }
 }
